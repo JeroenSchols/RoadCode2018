@@ -5,7 +5,7 @@ public class Point {
     }
 
     long norm2() {
-        return ((long) x)*x + ((long) y)y;
+        return ((long) x)*x + ((long) y)*y;
     }
 
     long dist2(Point p) {
