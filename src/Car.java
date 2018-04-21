@@ -11,4 +11,10 @@ public class Car {
     boolean inCache(Ad a) {
         return cache.contains(a);
     }
+
+    int addCache(Ad a) {
+        if (cache.contains(a)) {
+
+        }
+    }
 }
