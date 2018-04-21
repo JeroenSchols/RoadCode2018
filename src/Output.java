@@ -10,16 +10,12 @@ public class Output {
         
         ArrayList<Car> cars = Input.cars;
         ArrayList<Ad> ads = Input.ads;
-        int S = input.S;
-        int C = input.C;
-        
-        for (Car car : cars) {
-            car.cache = new ArrayList<>();
-        }
+        int S = Input.S;
+        int C = Input.C;
         
         long profit = 0;
         
-        for (int time = 0; time < T; time++) {
+        for (int time = 0; time < Input.T; time++) {
             for (Car car : cars) {
                 int nextAd = sc.nextInt();
                 int replaceAd = sc.nextInt();
@@ -40,7 +36,7 @@ public class Output {
                     } else {
                         profit -= C;
                         car.cache.add(nextAd);
-                        if (car.cache.size() > M) {
+                        if (car.cache.size() > Input.M) {
                             throw new IllegalArgumentException("Too many elements in cache");
                         }
                     }
