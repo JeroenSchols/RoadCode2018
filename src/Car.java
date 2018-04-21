@@ -22,6 +22,12 @@ public class Car {
         return ads[a.id].inCache;
     }
 
+    void setFinalTimes(ArrayList<Integer> finalTimes) {
+        for (int i = 0; i < Input.N; i++) {
+            ads[i].finalTime = finalTimes.get(i);
+        }
+    }
+    
     int addCache(Ad a) {
         lastDisplayed = a;
         int removedId = -1;
@@ -34,7 +40,12 @@ public class Car {
         ads[a.id].inCache = true;
 
         cache.remove(ads[a.id]);
-        ads[a.id].lastUsed = (new Random()).nextInt();//this.time;
+        
+        if (time >= ads[a.id].finalTime) {
+            ads[a.id].lastUsed = -1;
+        } else {
+            ads[a.id].lastUsed = this.time;
+        }    
         cache.add(ads[a.id]);
 
         // increase relative time
