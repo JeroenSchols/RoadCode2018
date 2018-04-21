@@ -50,7 +50,7 @@ public class Car {
             return r;
         }*/
         if (!cache.isEmpty()) {
-            CacheEntry toBeRemoved = cache.last();
+            CacheEntry toBeRemoved = cache.first();
             toBeRemoved.inCache = false;
             cache.remove(toBeRemoved);
             return toBeRemoved.ad;
