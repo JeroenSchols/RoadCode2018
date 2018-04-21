@@ -36,17 +36,13 @@ public class Car {
             removedId = removed.id;
         }
 
-        cache.add(ads[a.id]);
-        ads[a.id].inCache = true;
-
-        cache.remove(ads[a.id]);
-        
         if (time >= ads[a.id].finalTime) {
             ads[a.id].lastUsed = -1;
         } else {
             ads[a.id].lastUsed = this.time;
         }    
         cache.add(ads[a.id]);
+        ads[a.id].inCache = true;
 
         // increase relative time
         this.time++;
