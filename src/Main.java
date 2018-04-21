@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException{
-        PrintWriter writer = new PrintWriter("output/case4.txt");
+        PrintWriter writer = new PrintWriter("output/case9huge.txt");
 
         Input.read(4);
         int T = Input.T;
@@ -10,7 +10,9 @@ public class Main {
         ArrayList<Ad> ads = Input.ads;
         int C = Input.C;
         int S = Input.S;
+        long profit = 0;
         for (int t = 0; t < T; t++) {
+            //Collections.shuffle(cars);
             StringBuilder res = new StringBuilder();
             for (Car c : cars) {
                 Point l = c.locations.get(t);
@@ -32,7 +34,7 @@ public class Main {
                         bestAd = a;
                     }
                 }
-                c.curAd = bestAd;
+                profit += maxScore;
                 bestAd.curGain += bestAd.P;
                 int out = c.addCache(bestAd);
                 res.append(bestAd.id).append(" ").append(out).append(" ");
@@ -40,5 +42,6 @@ public class Main {
             writer.println(res);
         }
         writer.flush();
+        System.out.println(profit);
     }
 }
