@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException{
-        PrintWriter writer = new PrintWriter("out/hello.txt");
+        PrintWriter writer = new PrintWriter("output/case0.txt");
 
         Input.read(0);
         int T = Input.T;
