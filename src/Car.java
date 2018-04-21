@@ -62,6 +62,7 @@ public class Car {
     private class CacheEntry implements Comparable<CacheEntry> {
         Ad ad;
         int lastUsed;
+        int finalTime;
         boolean inCache = false;
 
         CacheEntry(Ad a) {
