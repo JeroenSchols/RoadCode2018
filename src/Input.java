@@ -18,7 +18,7 @@ public class Input {
 
         f = f % filenames.length;
 
-        Scanner sc = new Scanner(new FileReader("input\\" + filenames[f]));
+        Scanner sc = new Scanner(new FileReader("input/" + filenames[f]));
 
         N = sc.nextInt();
         V = sc.nextInt();

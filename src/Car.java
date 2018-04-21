@@ -1,8 +1,10 @@
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.CompareGenerator;
+
 import java.util.*;
 public class Car {
     int id;
     ArrayList<Point> locations = new ArrayList<>();
-    TreeSet<Ad> cache = new TreeSet<>();
+    TreeSet<CacheEntry> cache = new TreeSet<>();
     CacheEntry[] ads = new CacheEntry[Input.N];
     int cacheLimit = Input.M;
     Ad lastDisplayed = null;
@@ -11,29 +13,27 @@ public class Car {
     Car(int id) {
         this.id = id;
         this.time = 0;
+        for (int i = 0; i < ads.length; i++) {
+            ads[i] = new CacheEntry(Input.ads.get(i));
+        }
     }
 
     boolean inCache(Ad a) {
-        return cache.contains(a);
+        return ads[a.id].inCache;
     }
 
     int addCache(Ad a) {
         lastDisplayed = a;
         int removedId = -1;
-        if (cache.size() == cacheLimit && !cache.contains(a)) {
+        if (cache.size() == cacheLimit && !inCache(a)) {
             Ad removed = removeFromCache();
             removedId = removed.id;
         }
 
-        cache.add(a);
+        cache.add(ads[a.id]);
+        ads[a.id].inCache = true;
 
-        // check if there is already a CacheEntry for the ad a
-        if (ads[a.id] != null) {
-            ads[a.id].lastUsed = this.time;
-        } else {
-            ads[a.id] = new CacheEntry(a);
-            ads[a.id].lastUsed = this.time;
-        }
+        ads[a.id].lastUsed = this.time;
 
         // increase relative time
         this.time++;
@@ -47,32 +47,28 @@ public class Car {
             cache.remove(r);
             return r;
         }*/
-        int lowestTime = Input.T;
-        CacheEntry c = null;
-        int index = 0;
-        for (int i = 0; i < ads.length; i++) {
-            if (ads[i] != null && ads[i].lastUsed < lowestTime) {
-                lowestTime = ads[i].lastUsed;
-                c = ads[i];
-                index = i;
-            }
-        }
-
-        if (c != null) {
-            ads[index] = null;
-            cache.remove(c);
-            return c.ad;
+        if (!cache.isEmpty()) {
+            CacheEntry toBeRemoved = cache.first();
+            toBeRemoved.inCache = false;
+            cache.remove(toBeRemoved);
+            return toBeRemoved.ad;
         }
 
         return null;
     }
 
-    private class CacheEntry {
+    private class CacheEntry implements Comparable<CacheEntry> {
         Ad ad;
         int lastUsed;
+        boolean inCache = false;
 
         CacheEntry(Ad a) {
             this.ad = a;
+        }
+
+        @Override
+        public int compareTo(CacheEntry cacheEntry) {
+            return Integer.compare(this.lastUsed, cacheEntry.lastUsed);
         }
     }
 }
