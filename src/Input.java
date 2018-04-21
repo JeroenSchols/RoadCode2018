@@ -21,9 +21,32 @@ public class Input {
         Scanner sc = new Scanner(new FileReader("input\\" + filenames[f]));
 
         N = sc.nextInt();
+        V = sc.nextInt();
+        T = sc.nextInt();
+        M = sc.nextInt();
+        C = sc.nextInt();
+        S = sc.nextInt();
 
         for (int i = 0; i < N; i++) {
+            int P = sc.nextInt();
+            int B = sc.nextInt();
+            int R = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            Point point = new Point(x, y);
+            ads.add(new Ad(i, P, B, R, x, y));
+        }
 
+
+        for (int i = 0; i < V; i++) {
+            cars.add(new Car(i));
+        }
+
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                Point point = new Point(sc.nextInt(), sc.nextInt());
+                cars.get(j).locations.add(point);
+            }
         }
     }
 }

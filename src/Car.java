@@ -1,7 +1,8 @@
 import java.util.*;
 public class Car {
+    int id;
     ArrayList<Point> locations;
-    Car(ArrayList<Point> locations) {
-        this.locations = locations;
+    Car(int id) {
+        this.id = id;
     }
 }
