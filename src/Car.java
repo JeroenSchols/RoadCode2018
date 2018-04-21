@@ -34,7 +34,7 @@ public class Car {
         ads[a.id].inCache = true;
 
         cache.remove(ads[a.id]);
-        ads[a.id].lastUsed = this.time;
+        ads[a.id].lastUsed = (new Random()).nextInt();//this.time;
         cache.add(ads[a.id]);
 
         // increase relative time
