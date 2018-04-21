@@ -2,9 +2,9 @@ import java.util.*;
 import java.io.*;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException{
-        PrintWriter writer = new PrintWriter("output/case0.txt");
+        PrintWriter writer = new PrintWriter("output/case4.txt");
 
-        Input.read(0);
+        Input.read(4);
         int T = Input.T;
         ArrayList<Car> cars = Input.cars;
         ArrayList<Ad> ads = Input.ads;
