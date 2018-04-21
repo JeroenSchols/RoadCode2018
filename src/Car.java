@@ -15,6 +15,7 @@ public class Car {
         if (!inCache(a)) {
             addCache(a);
         }
+        lastDisplayed = curAd;
         curAd = a;
     }
 
