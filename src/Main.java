@@ -10,6 +10,21 @@ public class Main {
         ArrayList<Ad> ads = Input.ads;
         int C = Input.C;
         int S = Input.S;
+
+        for (Car c : cars) {
+            ArrayList<Integer> finalTimes = new ArrayList<>();
+            for (Ad a : ads) {
+                int res = -1;
+                for (int t = 0; t < T; t++) {
+                    if (a.isNear(c.locations.get(t))) {
+                        res = t;
+                    }
+                }
+                finalTimes.add(res);
+            }
+            c.setFinalTimes(finalTimes);
+        }
+
         long profit = 0;
         for (int t = 0; t < T; t++) {
             //Collections.shuffle(cars);
