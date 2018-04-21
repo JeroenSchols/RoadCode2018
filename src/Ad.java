@@ -3,6 +3,7 @@ public class Ad {
     int P;
     int B;
     int R;
+    int curGain = 0;
     Point c;
 
     public Ad(int id, int P, int B, int R, int x, int y) {
