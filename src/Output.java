@@ -1,31 +1,69 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Output {
   
-    Output() {
-        Scanner sc;
-        try {
-            sc = new Scanner(new File("test/hello.txt"));
-        } catch (Exception e) {
-            System.out.println(e.getClass().toString());
-            return;
-        }
+    long output() throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("test/hello.txt"));
+        
+        ArrayList<Car> cars = Input.cars;
+        ArrayList<Ad> ads = Input.ads;
+        int S = input.S;
+        int C = input.C;
         
         for (Car car : cars) {
             car.cache = new ArrayList<>();
         }
         
+        long profit = 0;
+        
         for (int time = 0; time < T; time++) {
-            for (int carNumber = 0; carNumber < V; carNumber++) {
+            for (Car car : cars) {
                 int nextAd = sc.nextInt();
                 int replaceAd = sc.nextInt();
                 
-                if (car.get)
+                if (car.lastDisplayed == null) {
+                    profit -= S;
+                    car.lastDisplayed = nextAd;
+                }
                 
+                if (nextAd != car.lastDisplayed) {
+                    profit -= S;
+                }
+                HashSet<Integer> h = new HashSet<>();
                 
-            }
+                if (replaceAd == -1) {
+                    if (car.cache.contains(nextAd)) {
+                        
+                    } else {
+                        profit -= C;
+                        car.cache.add(nextAd);
+                        if (car.cache.size() > M) {
+                            throw new IllegalArgumentException("Too many elements in cache");
+                        }
+                    }
+                } else {
+                    if (car.cache.contains(replaceAd)) {
+                        car.cache.remove(replaceAd);
+                        car.cache.add(nextAd);
+                        profit -= C;
+                    } else {
+                        throw new IllegalArgumentException("Tried to remove ad from cache that was not in the cache");
+                    }
+                }
+                
+                Ad ad = ads.get(nextAd);
+                if (car.locations.get(time).dist2(ad.c) <= ad.R) {
+                    
+                    profit += Math.min(ad.P, ad.B_Remaining);
+                    ad.B_Remaining -= Math.min(ad.P, ad.B_Remaining);
+                }
             
+            }
+          
         }
+        return profit;
     }
 }

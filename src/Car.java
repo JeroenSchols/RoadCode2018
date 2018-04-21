@@ -15,6 +15,7 @@ public class Car {
         if (!inCache(a)) {
             addCache(a);
         }
+        lastDisplayed = curAd;
         curAd = a;
     }
 
@@ -22,17 +23,26 @@ public class Car {
         return cache.contains(a);
     }
 
-    void addCache(Ad a) {
+    int addCache(Ad a) {
+        int removedId = -1;
         if (cache.size() == cacheLimit) {
-            removeFromCache();
+            Ad removed = removeFromCache();
+            removedId = removed.id;
         }
+
         cache.add(a);
+
+        return removedId;
     }
 
-    void removeFromCache() {
+    Ad removeFromCache() {
         if (!cache.isEmpty()) {
-            cache.remove(cache.iterator().next());
+            Ad r = cache.iterator().next();
+            cache.remove(r);
+            return r;
         }
+
+        return null;
     }
 
     void removeFromCache(Ad a) {}
