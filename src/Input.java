@@ -42,7 +42,7 @@ public class Input {
             cars.add(new Car(i));
         }
 
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < T; i++) {
             for (int j = 0; j < V; j++) {
                 Point point = new Point(sc.nextInt(), sc.nextInt());
                 cars.get(j).locations.add(point);
